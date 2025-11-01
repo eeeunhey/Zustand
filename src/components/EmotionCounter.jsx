@@ -4,7 +4,7 @@ import { ArrowUp, ArrowDown, RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 const EmotionCounter = () => {
-  const [inputValue, setInputValue] = useState("");
+
   const {
     count,
     emoji,
@@ -15,6 +15,8 @@ const EmotionCounter = () => {
     flashHeart,
     increaseBy,
     decreaseBy,
+    inputValue,
+    inputValueState,
   } = emotionStore();
 
   const getHeartState = () => {
@@ -57,7 +59,7 @@ const EmotionCounter = () => {
         <input
           type="number"
           value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
+          onChange={(e) => inputValueState(e.target.value)}
           className="input"
           placeholder="입력 값만큼 증가"
         />

@@ -12,16 +12,20 @@ const emojiState = (emoji) => {
   return "🚀";
 };
 
-const emotionStore = create((set, get) => ({
+const emotionStore = create((set) => ({
+
   count: 0,
   emoji: "🙂",
   heartFlash: null,
-  emojiPop: false,
+//   emojiPop: false,
+    inputValue: "",
 
-  emojiPop: () => {
-    set({ emojiPop: true });
-    setTimeout(() => set({ emojiPop: false }), 200);
-  },
+    inputValueState: (value) => set({ inputValue:value}),
+
+//   emojiPop: () => {
+//     set({ emojiPop: true });
+//     setTimeout(() => set({ emojiPop: false }), 200);
+//   },
 
   increase: () =>
     set((state) => ({
@@ -29,9 +33,9 @@ const emotionStore = create((set, get) => ({
       emoji: emojiState(state.count + 1),
     })),
 
-  increaseBy: (amount) => set((state) => ({ 
-    count: state.count + amount,
-    emoji: emojiState(state.count - amount),
+  increaseBy: (value) => set((state) => ({ 
+    count: state.count + value,
+    emoji: emojiState(state.count + value),
    })),
 
   decrease: () =>
@@ -40,16 +44,18 @@ const emotionStore = create((set, get) => ({
       emoji: emojiState(state.count - 1),
     })),
 
-  decreaseBy: (amount) => 
+  decreaseBy: (value) => 
     set((state) => ({ 
-        count: state.count - amount,
-        emoji: emojiState(state.count - amount),
+        count: state.count - value,
+        emoji: emojiState(state.count - value),
      })),
 
   reset: () =>
     set(() => ({
       count: 0,
       emoji: emojiState(0),
+      inputValue: "",
+
     })),
 
   flashHeart: (color) => {
